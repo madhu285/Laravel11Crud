@@ -108,7 +108,6 @@ class EmployeeController extends Controller
     {
         // Logic to delete a employees
         $employees = Employee::find($id);
-        print_r($employees);exit;
         if($employees){
             $employees->delete();
             return redirect('/employees')->with('message','Employee Deleted Successfully');

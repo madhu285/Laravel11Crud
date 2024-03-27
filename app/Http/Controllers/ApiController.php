@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 use App\Models\Employee;
 use Illuminate\Support\Facades\Storage;
 use Auth;
@@ -12,42 +13,34 @@ class ApiController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function register(Request $request)
+    {
+        // Example logic for registering a user
+        echo "string";exit;
+        $user = new User();
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = bcrypt($request->input('password'));
+        $user->save();
+
+        // Return a JSON response
+        return response()->json(['message' => 'User registered successfully', 'user' => $user], 201);
+    }
+
     public function index()
     {
         $employees = Employee::all();
-        print_r($employees);exit;
-        return response()->json(['message' => 'User created'], 201);
+        return response()->json($employees);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Other CRUD methods
      */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }
+?>

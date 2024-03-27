@@ -46,7 +46,12 @@
                                     <td>{{ $employee->updated_at}}</td>
                                     <td><a href="{{ route('employees.edit',['employee' => $employee->id])}}" class="btn btn-warning">Edit</a>
                                     <a href="{{ route('employees.show',['employee' => $employee->id])}}" class="btn btn-secondary">View</a>
-                                    <a href="{{ route('employees.destroy',['employee' => $employee->id])}}" class="btn btn-danger">Delete</a></td>
+                                    <form action="{{ route('employees.destroy', ['employee' => $employee->id]) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+
                                 </tr>
                                 @endforeach
                                 @endif

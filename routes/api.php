@@ -1,8 +1,13 @@
-<?php 
-
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+<?php
 use App\Http\Controllers\ApiController;
+use Illuminate\Support\Facades\Route;
 
-Route::resource('employees',ApiController::class);
+Route::get('/employees', function () {
+    // Route logic
+})->middleware('web');
+
+Route::resource('employees', ApiController::class);
+Route::post('/register', [ApiController::class, 'register']);
+
+
 ?>
